@@ -24,6 +24,8 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
+import top.theillusivec4.curios.api.type.capability.ICurio.SoundInfo;
+
 public class UmaSoulCuriosWrapper implements ICurio {
 
     private final ItemStack stack;

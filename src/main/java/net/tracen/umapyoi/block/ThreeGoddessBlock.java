@@ -28,6 +28,8 @@ import net.minecraftforge.network.NetworkHooks;
 import net.tracen.umapyoi.block.entity.BlockEntityRegistry;
 import net.tracen.umapyoi.block.entity.ThreeGoddessBlockEntity;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 public class ThreeGoddessBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
@@ -77,7 +79,7 @@ public class ThreeGoddessBlock extends BaseEntityBlock {
         if (!world.isClientSide) {
             BlockEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof ThreeGoddessBlockEntity blockEntity) {
-                NetworkHooks.openGui((ServerPlayer) player, blockEntity, pos);
+                NetworkHooks.openScreen((ServerPlayer) player, blockEntity, pos);
             }
         }
         return InteractionResult.SUCCESS;

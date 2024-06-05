@@ -3,7 +3,7 @@ package net.tracen.umapyoi.block;
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
@@ -25,6 +25,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.tracen.umapyoi.block.entity.BlockEntityRegistry;
 import net.tracen.umapyoi.block.entity.SilverSupportAlbumPedestalBlockEntity;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class SilverSupportAlbumPedestalBlock extends BaseEntityBlock {
     public SilverSupportAlbumPedestalBlock() {
@@ -79,7 +81,7 @@ public class SilverSupportAlbumPedestalBlock extends BaseEntityBlock {
                                 SoundSource.BLOCKS, 0.25F, 0.5F);
                         return InteractionResult.SUCCESS;
                     } else {
-                        player.displayClientMessage(new TranslatableComponent("umapyoi.uma_pedestal.cannot_add_item"),
+                        player.displayClientMessage(Component.translatable("umapyoi.uma_pedestal.cannot_add_item"),
                                 true);
                         return InteractionResult.PASS;
                     }

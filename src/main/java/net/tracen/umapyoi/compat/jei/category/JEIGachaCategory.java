@@ -17,7 +17,6 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.tracen.umapyoi.Umapyoi;
@@ -34,7 +33,7 @@ public class JEIGachaCategory implements IRecipeCategory<JEISimpleRecipe> {
     private final IDrawable icon;
 
     public JEIGachaCategory(IGuiHelper helper) {
-        title = new TranslatableComponent("umapyoi.jei.gacha");
+        title = Component.translatable("umapyoi.jei.gacha");
         ResourceLocation backgroundImage = new ResourceLocation(Umapyoi.MODID, "textures/gui/jei_compat.png");
         UID = new ResourceLocation(Umapyoi.MODID, "gacha");
         background = helper.createDrawable(backgroundImage, 0, 0, 93, 46);
@@ -57,7 +56,7 @@ public class JEIGachaCategory implements IRecipeCategory<JEISimpleRecipe> {
             if (output.is(ItemRegistry.SUPPORT_CARD.get())) {
                 Minecraft minecraft = Minecraft.getInstance();
                 Font fontRenderer = minecraft.font;
-                var needBookText = new TranslatableComponent("umapyoi.jei.gacha.need_book");
+                var needBookText = Component.translatable("umapyoi.jei.gacha.need_book");
                 fontRenderer.drawShadow(stack, needBookText,
                         46 - (fontRenderer.width(needBookText.getVisualOrderText()) / 2.0F), 36, 0xFEFEFE);
                 RenderSystem.setShaderColor(1, 1, 1, 1);
@@ -87,16 +86,6 @@ public class JEIGachaCategory implements IRecipeCategory<JEISimpleRecipe> {
     @Override
     public IDrawable getIcon() {
         return icon;
-    }
-
-    @Override
-    public ResourceLocation getUid() {
-        return UID;
-    }
-
-    @Override
-    public Class<? extends JEISimpleRecipe> getRecipeClass() {
-        return JEISimpleRecipe.class;
     }
 
 }

@@ -443,7 +443,7 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
     }
 
     private void addSupportCard(SupportCard key, String name) {
-        add(Util.makeDescriptionId("support_card", key.getRegistryName()) + ".name", name);
+        add(Util.makeDescriptionId("support_card", SupportCardRegistry.UMA_DATA_REGISTRY.get().getKey(key)) + ".name", name);
     }
 
     private void addUma(Supplier<UmaData> key, String name) {
@@ -463,7 +463,7 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
     }
 
     private void addUma(UmaData key, String name) {
-        add(Util.makeDescriptionId("umadata", key.getRegistryName()), name);
+        add(Util.makeDescriptionId("umadata", UmaDataRegistry.UMA_DATA_REGISTRY.get().getKey(key)), name);
     }
 
     private void addSupport(TrainingSupport key, String name) {

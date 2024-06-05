@@ -105,7 +105,7 @@ public class SkillLearningMenu extends ItemCombinerMenu {
         ItemStack result = this.inputSlots.getItem(0).copy();
         ItemStack supportItem = this.inputSlots.getItem(1).copy();
         if (supportItem.getItem()instanceof SkillBookItem skillBook) {
-            UmaSkillUtils.learnSkill(result, skillBook.getSkill(supportItem).getRegistryName());
+            UmaSkillUtils.learnSkill(result, UmaSkillRegistry.REGISTRY.get().getKey(skillBook.getSkill(supportItem)));
         }
         return result;
     }

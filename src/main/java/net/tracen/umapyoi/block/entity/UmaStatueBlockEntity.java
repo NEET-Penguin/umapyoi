@@ -10,8 +10,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.tracen.umapyoi.item.ItemRegistry;
@@ -72,7 +72,7 @@ public class UmaStatueBlockEntity extends SyncedBlockEntity {
     @Override
     @Nonnull
     public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-        if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
+        if (cap.equals(ForgeCapabilities.ITEM_HANDLER)) {
             return inputHandler.cast();
         }
         return super.getCapability(cap, side);

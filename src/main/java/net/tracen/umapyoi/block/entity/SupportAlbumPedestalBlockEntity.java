@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 
 import com.google.common.collect.Lists;
@@ -21,6 +22,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
@@ -29,7 +31,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.tracen.umapyoi.UmapyoiConfig;
@@ -196,7 +197,7 @@ public class SupportAlbumPedestalBlockEntity extends SyncedBlockEntity implement
         if (this.level == null)
             return ItemStack.EMPTY;
 
-        Random rand = this.getLevel().getRandom();
+        RandomSource rand = this.getLevel().getRandom();
         Registry<SupportCard> registry = UmapyoiAPI.getSupportCardRegistry(this.getLevel());
         
         @NotNull
@@ -247,7 +248,7 @@ public class SupportAlbumPedestalBlockEntity extends SyncedBlockEntity implement
     @Override
     @Nonnull
     public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-        if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
+        if (cap.equals(ForgeCapabilities.ITEM_HANDLER)) {
             if (side == null || side.equals(Direction.UP)) {
                 return inputHandler.cast();
             } else {

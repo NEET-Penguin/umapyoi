@@ -9,7 +9,7 @@ import net.tracen.umapyoi.Umapyoi;
 
 public class ContainerRegistry {
     public static final DeferredRegister<MenuType<?>> CONTAINER_TYPES = DeferredRegister
-            .create(ForgeRegistries.CONTAINERS, Umapyoi.MODID);
+            .create(ForgeRegistries.MENU_TYPES, Umapyoi.MODID);
 
     public static final RegistryObject<MenuType<ThreeGoddessContainer>> THREE_GODDESS = CONTAINER_TYPES
             .register("three_goddess", () -> IForgeMenuType.create(ThreeGoddessContainer::new));

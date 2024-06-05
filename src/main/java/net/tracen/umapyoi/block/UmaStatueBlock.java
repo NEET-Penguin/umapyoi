@@ -27,6 +27,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.tracen.umapyoi.block.entity.BlockEntityRegistry;
 import net.tracen.umapyoi.block.entity.UmaStatueBlockEntity;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 public class UmaStatueBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     protected static final VoxelShape SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);

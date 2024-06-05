@@ -27,7 +27,7 @@ public class SkillKeyMapping {
             "key.category.umapyoi");
 
     @SubscribeEvent
-    public static void onKeyboardInput(InputEvent.KeyInputEvent event) {
+    public static void onKeyboardInput(InputEvent.Key event) {
         if (KEY_USE_SKILL.isDown()) {
             NetPacketHandler.INSTANCE.sendToServer(new UseSkillPacket("check check"));
             return;

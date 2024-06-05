@@ -5,13 +5,13 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.inventory.ItemCombinerScreen;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import net.tracen.umapyoi.Umapyoi;
 import net.tracen.umapyoi.container.SkillLearningMenu;
 import net.tracen.umapyoi.item.SkillBookItem;
+import net.tracen.umapyoi.registry.UmaSkillRegistry;
 import net.tracen.umapyoi.registry.skills.UmaSkill;
 import net.tracen.umapyoi.registry.umadata.Growth;
 import net.tracen.umapyoi.utils.UmaSoulUtils;
@@ -38,21 +38,21 @@ public class SkillLearningScreen extends ItemCombinerScreen<SkillLearningMenu> {
                     : ItemStack.EMPTY;
             boolean has_retired = UmaSoulUtils.getGrowth(soul) == Growth.RETIRED;
             boolean has_learned = UmaSoulUtils.getSkills(soul)
-                    .contains(StringTag.valueOf(skill.getRegistryName().toString()));
+                    .contains(StringTag.valueOf(UmaSkillRegistry.REGISTRY.get().getKey(skill).toString()));
             boolean has_learned_upper = skill.getUpperSkill() != null && 
                     UmaSoulUtils.getSkills(soul).contains(StringTag.valueOf(skill.getUpperSkill().toString()));
             boolean slot_needed = !soul.isEmpty() && !UmaSoulUtils.hasEmptySkillSlot(soul);
             if (has_learned || has_learned_upper)
-                this.font.draw(ms, new TranslatableComponent("umapyoi.skill.has_learned_skill"), 51, 31, 0x794016);
+                this.font.draw(ms, Component.translatable("umapyoi.skill.has_learned_skill"), 51, 31, 0x794016);
             else if (has_retired)
-                this.font.draw(ms, new TranslatableComponent("umapyoi.skill.has_retired"), 51, 31, 0x794016);
+                this.font.draw(ms, Component.translatable("umapyoi.skill.has_retired"), 51, 31, 0x794016);
             else if (slot_needed)
-                this.font.draw(ms, new TranslatableComponent("umapyoi.skill.slot_needed"), 51, 31, 0x794016);
+                this.font.draw(ms, Component.translatable("umapyoi.skill.slot_needed"), 51, 31, 0x794016);
             else if (skill.getRequiredWisdom() > 0)
-                this.font.draw(ms, new TranslatableComponent("umapyoi.skill.require_wisdom",
+                this.font.draw(ms, Component.translatable("umapyoi.skill.require_wisdom",
                         UmaStatusUtils.getStatusLevel(skill.getRequiredWisdom())), 51, 31, 0x794016);
             else
-                this.font.draw(ms, new TranslatableComponent("umapyoi.skill.no_require"), 51, 31, 0x794016);
+                this.font.draw(ms, Component.translatable("umapyoi.skill.no_require"), 51, 31, 0x794016);
         }
 
     }

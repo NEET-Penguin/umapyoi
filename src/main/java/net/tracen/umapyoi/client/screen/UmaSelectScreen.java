@@ -18,7 +18,6 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -109,7 +108,7 @@ public class UmaSelectScreen extends AbstractContainerScreen<UmaSelectMenu> impl
         this.minecraft.keyboardHandler.setSendRepeatsToGui(true);
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
-        this.searchBox = new EditBox(this.font, i + 42, j + 17, 90, 12, new TranslatableComponent("container.repair"));
+        this.searchBox = new EditBox(this.font, i + 42, j + 17, 90, 12, Component.translatable("container.repair"));
         this.searchBox.setCanLoseFocus(false);
         this.searchBox.setTextColor(-1);
         this.searchBox.setTextColorUneditable(-1);
@@ -264,7 +263,7 @@ public class UmaSelectScreen extends AbstractContainerScreen<UmaSelectMenu> impl
                     return card.getSupporters().contains(ResourceLocation.tryParse(s)) && rankingCheck;
                 }
 
-                var localized = new TranslatableComponent(Util.makeDescriptionId("support_card", resloc) + ".name");
+                var localized = Component.translatable(Util.makeDescriptionId("support_card", resloc) + ".name");
                 boolean nameCheck = resloc.toString().contains(s)
                         || ChatFormatting.stripFormatting(localized.getString()).contains(s);
 
@@ -284,7 +283,7 @@ public class UmaSelectScreen extends AbstractContainerScreen<UmaSelectMenu> impl
                     s = s.substring(1);
                     return uma.getIdentifier().equals(ResourceLocation.tryParse(s)) && rankingCheck;
                 }
-                var localized = new TranslatableComponent(Util.makeDescriptionId("umadata", resloc));
+                var localized = Component.translatable(Util.makeDescriptionId("umadata", resloc));
                 boolean nameCheck = resloc.toString().contains(s)
                         || ChatFormatting.stripFormatting(localized.getString()).contains(s);
 

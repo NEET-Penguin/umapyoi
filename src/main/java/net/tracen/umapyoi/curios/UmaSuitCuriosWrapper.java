@@ -8,6 +8,8 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
+import top.theillusivec4.curios.api.type.capability.ICurio.SoundInfo;
+
 public class UmaSuitCuriosWrapper implements ICurio {
     private final ItemStack stack;
 

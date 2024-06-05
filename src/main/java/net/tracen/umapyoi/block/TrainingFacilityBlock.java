@@ -30,6 +30,8 @@ import net.minecraftforge.network.NetworkHooks;
 import net.tracen.umapyoi.block.entity.BlockEntityRegistry;
 import net.tracen.umapyoi.block.entity.TrainingFacilityBlockEntity;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 public class TrainingFacilityBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
@@ -73,7 +75,7 @@ public class TrainingFacilityBlock extends BaseEntityBlock {
         if (!world.isClientSide) {
             BlockEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof TrainingFacilityBlockEntity blockEntity) {
-                NetworkHooks.openGui((ServerPlayer) player, blockEntity, pos);
+                NetworkHooks.openScreen((ServerPlayer) player, blockEntity, pos);
             }
         }
         return InteractionResult.SUCCESS;

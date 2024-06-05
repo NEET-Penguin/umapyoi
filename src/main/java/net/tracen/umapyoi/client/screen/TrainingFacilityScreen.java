@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import cn.mcmod_mmf.mmlib.client.RenderUtils;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -93,7 +92,7 @@ public class TrainingFacilityScreen extends AbstractContainerScreen<TrainingFaci
         }
         for (int i = 0; i < 7; i++) {
             if (types[i] > 0) {
-                this.font.draw(ms, new TextComponent(String.valueOf(types[i])), this.leftPos + 23.0F + i * 23.0F,
+                this.font.draw(ms, Component.literal(String.valueOf(types[i])), this.leftPos + 23.0F + i * 23.0F,
                         this.topPos + 44, 0X86D008);
             }
         }

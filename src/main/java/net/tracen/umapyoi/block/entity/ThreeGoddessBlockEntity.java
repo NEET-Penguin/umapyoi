@@ -13,10 +13,10 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -26,8 +26,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.tracen.umapyoi.api.UmapyoiAPI;
@@ -96,7 +96,7 @@ public class ThreeGoddessBlockEntity extends SyncedBlockEntity implements MenuPr
     }
 
     private static void addWorkingParticle(Level pLevel, BlockPos pPos) {
-        Random pRand = pLevel.getRandom();
+        RandomSource pRand = pLevel.getRandom();
         List<BlockPos> posOffsets = BlockPos.betweenClosedStream(-2, 0, -2, 2, 1, 2).filter(pos -> {
             return Math.abs(pos.getX()) == 2 || Math.abs(pos.getZ()) == 2;
         }).map(BlockPos::immutable).toList();
@@ -181,7 +181,7 @@ public class ThreeGoddessBlockEntity extends SyncedBlockEntity implements MenuPr
     @Override
     @Nonnull
     public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-        if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
+        if (cap.equals(ForgeCapabilities.ITEM_HANDLER)) {
             if (side == null || !side.equals(Direction.DOWN)) {
                 return inputHandler.cast();
             } else {
@@ -314,7 +314,7 @@ public class ThreeGoddessBlockEntity extends SyncedBlockEntity implements MenuPr
 
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("container.umapyoi.three_goddess");
+        return Component.translatable("container.umapyoi.three_goddess");
     }
 
 }

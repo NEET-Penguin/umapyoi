@@ -9,14 +9,14 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.gui.ForgeIngameGui;
-import net.minecraftforge.client.gui.IIngameOverlay;
+import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.tracen.umapyoi.Umapyoi;
 import net.tracen.umapyoi.UmapyoiConfig;
 import net.tracen.umapyoi.api.UmapyoiAPI;
 import net.tracen.umapyoi.utils.UmaSoulUtils;
 
-public class ActionBarOverlay implements IIngameOverlay {
+public class ActionBarOverlay implements IGuiOverlay {
     public static final ActionBarOverlay INSTANCE = new ActionBarOverlay();
     private final Minecraft minecraft = Minecraft.getInstance();
 
@@ -26,7 +26,7 @@ public class ActionBarOverlay implements IIngameOverlay {
     private static final ResourceLocation HUD = new ResourceLocation(Umapyoi.MODID, "textures/gui/actionbar.png");
 
     @Override
-    public void render(ForgeIngameGui gui, PoseStack poseStack, float partialTick, int width, int height) {
+    public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int width, int height) {
         if (!UmapyoiConfig.OVERLAY_SWITCH.get())
             return;
         int x = width;

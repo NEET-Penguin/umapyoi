@@ -9,7 +9,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.MenuProvider;
@@ -21,8 +20,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.tracen.umapyoi.container.TrainingFacilityContainer;
@@ -237,7 +236,7 @@ public class TrainingFacilityBlockEntity extends SyncedBlockEntity implements Me
     @Override
     @Nonnull
     public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-        if (cap.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
+        if (cap.equals(ForgeCapabilities.ITEM_HANDLER)) {
             if (side == null || side.equals(Direction.UP)) {
                 return inputHandler.cast();
             } else {
@@ -282,7 +281,7 @@ public class TrainingFacilityBlockEntity extends SyncedBlockEntity implements Me
 
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("container.umapyoi.training_facility");
+        return Component.translatable("container.umapyoi.training_facility");
     }
 
 }

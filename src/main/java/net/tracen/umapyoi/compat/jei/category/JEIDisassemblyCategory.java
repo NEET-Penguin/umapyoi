@@ -9,7 +9,6 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.tracen.umapyoi.Umapyoi;
@@ -24,7 +23,7 @@ public class JEIDisassemblyCategory implements IRecipeCategory<JEISimpleRecipe> 
     private final IDrawable icon;
 
     public JEIDisassemblyCategory(IGuiHelper helper) {
-        title = new TranslatableComponent("umapyoi.jei.disassembly");
+        title = Component.translatable("umapyoi.jei.disassembly");
         ResourceLocation backgroundImage = new ResourceLocation(Umapyoi.MODID, "textures/gui/jei_compat.png");
         UID = new ResourceLocation(Umapyoi.MODID, "disassembly");
         background = helper.createDrawable(backgroundImage, 0, 0, 93, 46);
@@ -56,16 +55,6 @@ public class JEIDisassemblyCategory implements IRecipeCategory<JEISimpleRecipe> 
     @Override
     public IDrawable getIcon() {
         return icon;
-    }
-
-    @Override
-    public ResourceLocation getUid() {
-        return UID;
-    }
-
-    @Override
-    public Class<? extends JEISimpleRecipe> getRecipeClass() {
-        return JEISimpleRecipe.class;
     }
 
 }

@@ -2,7 +2,6 @@ package net.tracen.umapyoi.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
@@ -16,8 +15,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.tracen.umapyoi.container.SkillLearningMenu;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 public class SkillLearningTableBlock extends CraftingTableBlock {
-    private static final Component CONTAINER_TITLE = new TranslatableComponent("container.umapyoi.skill_learning");
+    private static final Component CONTAINER_TITLE = Component.translatable("container.umapyoi.skill_learning");
 
     public SkillLearningTableBlock() {
         super(Properties.copy(Blocks.OAK_WOOD).noOcclusion());

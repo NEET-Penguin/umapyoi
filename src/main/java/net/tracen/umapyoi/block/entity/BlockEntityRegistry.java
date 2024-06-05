@@ -9,7 +9,7 @@ import net.tracen.umapyoi.block.BlockRegistry;
 
 public class BlockEntityRegistry {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister
-            .create(ForgeRegistries.BLOCK_ENTITIES, Umapyoi.MODID);
+            .create(ForgeRegistries.BLOCK_ENTITY_TYPES, Umapyoi.MODID);
 
     public static final RegistryObject<BlockEntityType<ThreeGoddessBlockEntity>> THREE_GODDESS = BLOCK_ENTITIES
             .register("three_goddess", () -> BlockEntityType.Builder

@@ -11,6 +11,7 @@ import com.mojang.serialization.JsonOps;
 
 import cn.mcmod_mmf.mmlib.utils.DataGenUtil;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
@@ -51,14 +52,14 @@ public class UmaDataProvider implements DataProvider {
     }
 
     public void addData(Supplier<UmaData> data) {
-        this.datas.computeIfAbsent(data.get().getRegistryName(), loc -> {
+        this.datas.computeIfAbsent(data.get().getIdentifier(), loc -> {
             existingFileHelper.trackGenerated(loc, resourceType);
             return data.get();
         });
     }
 
     @Override
-    public void run(HashCache cache) throws IOException {
+    public void run(CachedOutput output) throws IOException {
         this.datas.clear();
         this.addDatas();
         final Path outputFolder = generator.getOutputFolder();
@@ -76,7 +77,7 @@ public class UmaDataProvider implements DataProvider {
                     .ifPresent(json -> // Output to file on encode success.
             {
                         try {
-                            DataProvider.save(DataGenUtil.DATA_GSON, cache, json, path);
+                            DataProvider.saveStable(output, json, path);
                         } catch (IOException e) // The throws can't deal with this exception, because we're inside the
                                                 // ifPresent.
                         {

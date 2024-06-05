@@ -11,6 +11,7 @@ import com.mojang.serialization.JsonOps;
 
 import cn.mcmod_mmf.mmlib.utils.DataGenUtil;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
@@ -52,7 +53,7 @@ public class SupportCardDataProvider implements DataProvider {
 
 
     public void addData(Supplier<SupportCard> data) {
-        this.addData(data, data.get().getRegistryName());
+        this.addData(data, SupportCardRegistry.UMA_DATA_REGISTRY.get().getKey(data.get()));
     }
     
     public void addData(Supplier<SupportCard> data, ResourceLocation name) {
@@ -63,7 +64,7 @@ public class SupportCardDataProvider implements DataProvider {
     }
 
     @Override
-    public void run(HashCache cache) throws IOException {
+    public void run(CachedOutput output) throws IOException {
         this.datas.clear();
         this.addDatas();
         final Path outputFolder = generator.getOutputFolder();
@@ -81,7 +82,7 @@ public class SupportCardDataProvider implements DataProvider {
                     .ifPresent(json -> // Output to file on encode success.
             {
                         try {
-                            DataProvider.save(DataGenUtil.DATA_GSON, cache, json, path);
+                            DataProvider.saveStable(output, json, path);
                         } catch (IOException e) // The throws can't deal with this exception, because we're inside the
                                                 // ifPresent.
                         {

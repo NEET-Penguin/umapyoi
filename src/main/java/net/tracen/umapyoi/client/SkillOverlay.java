@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.gui.ForgeIngameGui;
-import net.minecraftforge.client.gui.IIngameOverlay;
+import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.tracen.umapyoi.Umapyoi;
 import net.tracen.umapyoi.UmapyoiConfig;
 import net.tracen.umapyoi.api.UmapyoiAPI;
@@ -18,7 +18,7 @@ import net.tracen.umapyoi.registry.UmaSkillRegistry;
 import net.tracen.umapyoi.registry.skills.UmaSkill;
 import net.tracen.umapyoi.utils.UmaSoulUtils;
 
-public class SkillOverlay implements IIngameOverlay {
+public class SkillOverlay implements IGuiOverlay {
     public static final SkillOverlay INSTANCE = new SkillOverlay();
     private final Minecraft minecraft = Minecraft.getInstance();
 
@@ -28,7 +28,7 @@ public class SkillOverlay implements IIngameOverlay {
     private static final ResourceLocation HUD = new ResourceLocation(Umapyoi.MODID, "textures/gui/skill_hud.png");
 
     @Override
-    public void render(ForgeIngameGui gui, PoseStack poseStack, float partialTick, int width, int height) {
+    public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int width, int height) {
         if (!UmapyoiConfig.OVERLAY_SWITCH.get())
             return;
         int x = width / 2;

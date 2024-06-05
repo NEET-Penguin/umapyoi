@@ -7,7 +7,7 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.BlockPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.ItemUsedOnBlockTrigger;
+import net.minecraft.advancements.critereon.ItemInteractWithBlockTrigger;
 import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -34,7 +34,7 @@ public class UmapyoiAdvancements extends AbstractAdvancements {
         getAdvancement(summon_pedestal, new ItemStack(ItemRegistry.SUPPORT_CARD.get()), "support_pedestal", FrameType.TASK, true,
                 false, false)
                         .addCriterion("buildSupport",
-                                ItemUsedOnBlockTrigger.TriggerInstance.itemUsedOnBlock(
+                                ItemInteractWithBlockTrigger.TriggerInstance.itemUsedOnBlock(
                                         LocationPredicate.Builder.location()
                                                 .setBlock(BlockPredicate.Builder.block().of(UmapyoiBlockTags.PEDESTAL_UMA).build()),
                                         ItemPredicate.Builder.item().of(Items.BOOK)))

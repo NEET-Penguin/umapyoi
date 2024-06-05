@@ -3,7 +3,6 @@ package net.tracen.umapyoi.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
@@ -27,8 +26,10 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.tracen.umapyoi.container.DisassemblyBlockMenu;
 
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 public class DisassemblyBlock extends CraftingTableBlock {
-    private static final Component CONTAINER_TITLE = new TranslatableComponent("container.umapyoi.disassembly_block");
+    private static final Component CONTAINER_TITLE = Component.translatable("container.umapyoi.disassembly_block");
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
