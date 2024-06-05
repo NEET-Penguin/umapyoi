@@ -23,7 +23,7 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 
-version = '1.4.27-1.18.2'
+version = '1.4.27-1.19.2'
 group = 'net.tracen' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'umapyoi'
 
@@ -38,7 +38,7 @@ mixin {
 }
 
 minecraft {
-    mappings channel: 'parchment', version: '1.18.2-2022.08.07-1.18.2'
+    mappings channel: 'parchment', version: '2022.11.27-1.19.2'
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
         client {
@@ -126,7 +126,7 @@ repositories {
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
 
-    maven { url = "https://raw.github.com/0999312/MMMaven/main/repository" }
+//    maven { url = "https://raw.github.com/0999312/MMMaven/main/repository" }
     maven {
         url = "https://maven.theillusivec4.top/"
     }
@@ -137,11 +137,11 @@ repositories {
     maven { url = 'https://maven.blamejared.com' }
 
     maven {
-        name "KosmX's maven"
-        url 'https://maven.kosmx.dev/'
+        name = "KosmX's maven"
+        url = 'https://maven.kosmx.dev/'
     }
 
-	maven { url "https://maven.shedaniel.me/" }
+	maven { url = "https://maven.shedaniel.me/" }
 
 	flatDir {
         dirs 'libs'
@@ -150,22 +150,22 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.1.73'
+    minecraft 'net.minecraftforge:forge:1.19.2-43.3.8'
     // Apply Mixin AP
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("cn.mcmod_mmf.mmlib:MMLib:1.4.5-1.18.2")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.9.1")
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.9.1:api")
+    implementation fg.deobf("cn.mcmod_mmf.mmlib:MMLib:1.4.5-1.19.2")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.6.1")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.6.1:api")
 
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-70")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-70")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.2-77")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.2-77")
 
-    compileOnly fg.deobf("mezz.jei:jei-1.18.2-forge:10.0.0.191")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2-forge:10.0.0.191")
+    compileOnly fg.deobf("mezz.jei:jei-1.19.2-forge:11.6.0.1019")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.19.2-forge:11.6.0.1019")
 
-	compileOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:6.5.102")
-	compileOnly fg.deobf("dev.tr7zw.firstperson:firstperson-forge:2.2.3-mc1.18.2")
+	compileOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:8.3.115")
+	compileOnly fg.deobf("dev.tr7zw.firstperson:firstperson-forge:2.2.3-mc1.19.2")
 
 }
 
