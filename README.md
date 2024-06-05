@@ -1,4 +1,6 @@
 # umapyoi
+An attempt at a Forge 1.19.2 port of Umapyoi mod.
+
 以《赛马娘 Pretty Derby》为主题的“玩家育成”模组。  
 准备中。  
 ***
