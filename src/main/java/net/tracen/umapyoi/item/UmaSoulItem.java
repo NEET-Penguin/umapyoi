@@ -14,7 +14,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.CreativeModeTab;
@@ -48,7 +47,7 @@ public class UmaSoulItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        if (this.allowdedIn(group)) {
+        if (this.allowedIn(group)) {
             if (Minecraft.getInstance().getConnection() != null) {
                 UmaSoulItem.sortedUmaDataList().forEach(entry -> {
                     var initUmaSoul = UmaSoulUtils.initUmaSoul(getDefaultInstance(), entry.getKey().location(),
@@ -119,36 +118,36 @@ public class UmaSoulItem extends Item {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         int ranking = ResultRankingUtils.getRanking(stack);
         if(UmaSoulUtils.getGrowth(stack) == Growth.RETIRED)
-            tooltip.add(new TranslatableComponent("tooltip.umapyoi.uma_soul.ranking", UmaStatusUtils.getStatusLevel(ranking))
+            tooltip.add(Component.translatable("tooltip.umapyoi.uma_soul.ranking", UmaStatusUtils.getStatusLevel(ranking))
                             .withStyle(ChatFormatting.GOLD));
         if (Screen.hasShiftDown() || !UmapyoiConfig.TOOLTIP_SWITCH.get()) {
             tooltip.add(
-                    new TranslatableComponent("tooltip.umapyoi.uma_soul.soul_details").withStyle(ChatFormatting.AQUA));
+                    Component.translatable("tooltip.umapyoi.uma_soul.soul_details").withStyle(ChatFormatting.AQUA));
             int[] property = UmaSoulUtils.getProperty(stack);
             int[] maxProperty = UmaSoulUtils.getMaxProperty(stack);
 
-            tooltip.add(new TranslatableComponent("tooltip.umapyoi.uma_soul.speed_details",
+            tooltip.add(Component.translatable("tooltip.umapyoi.uma_soul.speed_details",
                     UmaStatusUtils.getStatusLevel(property[StatusType.SPEED.getId()]),
                     UmaStatusUtils.getStatusLevel(maxProperty[StatusType.SPEED.getId()]))
                             .withStyle(ChatFormatting.DARK_GREEN));
-            tooltip.add(new TranslatableComponent("tooltip.umapyoi.uma_soul.stamina_details",
+            tooltip.add(Component.translatable("tooltip.umapyoi.uma_soul.stamina_details",
                     UmaStatusUtils.getStatusLevel(property[StatusType.STAMINA.getId()]),
                     UmaStatusUtils.getStatusLevel(maxProperty[StatusType.STAMINA.getId()]))
                             .withStyle(ChatFormatting.DARK_GREEN));
-            tooltip.add(new TranslatableComponent("tooltip.umapyoi.uma_soul.strength_details",
+            tooltip.add(Component.translatable("tooltip.umapyoi.uma_soul.strength_details",
                     UmaStatusUtils.getStatusLevel(property[StatusType.STRENGTH.getId()]),
                     UmaStatusUtils.getStatusLevel(maxProperty[StatusType.STRENGTH.getId()]))
                             .withStyle(ChatFormatting.DARK_GREEN));
-            tooltip.add(new TranslatableComponent("tooltip.umapyoi.uma_soul.guts_details",
+            tooltip.add(Component.translatable("tooltip.umapyoi.uma_soul.guts_details",
                     UmaStatusUtils.getStatusLevel(property[StatusType.GUTS.getId()]),
                     UmaStatusUtils.getStatusLevel(maxProperty[StatusType.GUTS.getId()]))
                             .withStyle(ChatFormatting.DARK_GREEN));
-            tooltip.add(new TranslatableComponent("tooltip.umapyoi.uma_soul.wisdom_details",
+            tooltip.add(Component.translatable("tooltip.umapyoi.uma_soul.wisdom_details",
                     UmaStatusUtils.getStatusLevel(property[StatusType.WISDOM.getId()]),
                     UmaStatusUtils.getStatusLevel(maxProperty[StatusType.WISDOM.getId()]))
                             .withStyle(ChatFormatting.DARK_GREEN));
         } else {
-            tooltip.add(new TranslatableComponent("tooltip.umapyoi.press_shift_for_details")
+            tooltip.add(Component.translatable("tooltip.umapyoi.press_shift_for_details")
                     .withStyle(ChatFormatting.AQUA));
         }
     }

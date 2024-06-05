@@ -18,7 +18,7 @@ public class TrainingSupportRegistry {
             .create(TrainingSupport.REGISTRY_KEY, Umapyoi.MODID);
 
     public static final Supplier<IForgeRegistry<TrainingSupport>> REGISTRY = SUPPORTS
-            .makeRegistry(TrainingSupport.class, RegistryBuilder::new);
+            .makeRegistry(RegistryBuilder::new);
 
     public static final RegistryObject<TrainingSupport> SPEED_SUPPORT = SUPPORTS.register("speed_support",
             () -> new StatusSupport(StatusType.SPEED));

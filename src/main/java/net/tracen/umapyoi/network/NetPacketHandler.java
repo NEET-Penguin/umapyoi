@@ -20,16 +20,16 @@ public class NetPacketHandler {
                 () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 
         INSTANCE.messageBuilder(UseSkillPacket.class, nextID(), NetworkDirection.PLAY_TO_SERVER)
-                .encoder(UseSkillPacket::toBytes).decoder(UseSkillPacket::new).consumer(UseSkillPacket::handler).add();
+                .encoder(UseSkillPacket::toBytes).decoder(UseSkillPacket::new).consumerMainThread(UseSkillPacket::handler).add();
         INSTANCE.messageBuilder(SelectSkillPacket.class, nextID(), NetworkDirection.PLAY_TO_SERVER)
                 .encoder(SelectSkillPacket::toBytes).decoder(SelectSkillPacket::new)
-                .consumer(SelectSkillPacket::handler).add();
+                .consumerMainThread(SelectSkillPacket::handler).add();
 
         INSTANCE.messageBuilder(SetupResultPacket.class, nextID(), NetworkDirection.PLAY_TO_SERVER)
                 .encoder(SetupResultPacket::toBytes).decoder(SetupResultPacket::new)
-                .consumer(SetupResultPacket::handler).add();
+                .consumerMainThread(SetupResultPacket::handler).add();
         INSTANCE.messageBuilder(EmptyResultPacket.class, nextID(), NetworkDirection.PLAY_TO_SERVER)
                 .encoder(EmptyResultPacket::toBytes).decoder(EmptyResultPacket::new)
-                .consumer(EmptyResultPacket::handler).add();
+                .consumerMainThread(EmptyResultPacket::handler).add();
     }
 }

@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +24,7 @@ public class FadedUmaSoulItem extends Item {
     public void appendHoverText(ItemStack pStack, Level pLevel, List<Component> pTooltipComponents,
             TooltipFlag pIsAdvanced) {
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-        pTooltipComponents.add(new TranslatableComponent("tooltip.umapyoi.umadata.name",
+        pTooltipComponents.add(Component.translatable("tooltip.umapyoi.umadata.name",
                 UmaSoulUtils.getTranslatedUmaName(this.getUmaName(pStack))).withStyle(ChatFormatting.GRAY));
     }
 

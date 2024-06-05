@@ -20,8 +20,7 @@ public class UmaFactorRegistry {
     public static final DeferredRegister<UmaFactor> FACTORS = DeferredRegister.create(UmaFactor.REGISTRY_KEY,
             Umapyoi.MODID);
 
-    public static final Supplier<IForgeRegistry<UmaFactor>> REGISTRY = FACTORS.makeRegistry(UmaFactor.class,
-            RegistryBuilder::new);
+    public static final Supplier<IForgeRegistry<UmaFactor>> REGISTRY = FACTORS.makeRegistry(RegistryBuilder::new);
 
     public static final RegistryObject<UmaFactor> SPEED_FACTOR = FACTORS.register("speed_factor",
             () -> new StatusFactor(StatusType.SPEED));

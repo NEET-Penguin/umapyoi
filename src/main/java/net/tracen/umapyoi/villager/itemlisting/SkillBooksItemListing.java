@@ -1,9 +1,9 @@
 package net.tracen.umapyoi.villager.itemlisting;
 
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +21,8 @@ public class SkillBooksItemListing implements ItemListing {
         this.villagerXp = pVillagerXp;
     }
 
-    public MerchantOffer getOffer(Entity pTrader, Random pRand) {
+    @Override
+    public MerchantOffer getOffer(Entity pTrader, RandomSource pRand) {
         List<UmaSkill> list = UmaSkillRegistry.REGISTRY.get().getValues().stream().collect(Collectors.toList());
         UmaSkill skill = list.get(pRand.nextInt(list.size()));
         int i = skill.getSkillLevel() * 2;

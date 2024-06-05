@@ -6,7 +6,6 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.tracen.umapyoi.registry.UmaDataRegistry;
@@ -22,7 +21,7 @@ public class UmaSoulUtils {
     }
 
     public static Component getTranslatedUmaName(ResourceLocation name) {
-        return new TranslatableComponent(Util.makeDescriptionId("umadata", name));
+        return Component.translatable(Util.makeDescriptionId("umadata", name));
     }
 
     public static ItemStack initUmaSoul(ItemStack stack, ResourceLocation name, UmaData data) {

@@ -27,10 +27,10 @@ public class SkillBookItem extends Item {
 
     @Override
     public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
-        if (this.allowdedIn(pCategory)) {
+        if (this.allowedIn(pCategory)) {
             for (UmaSkill skill : UmaSkillRegistry.REGISTRY.get().getValues()) {
                 ItemStack result = getDefaultInstance();
-                result.getOrCreateTag().putString("skill", skill.getRegistryName().toString());
+                result.getOrCreateTag().putString("skill", UmaSkillRegistry.REGISTRY.get().getKey(skill).toString());
                 pItems.add(result);
             }
         }

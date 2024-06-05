@@ -22,7 +22,7 @@ import net.tracen.umapyoi.utils.UmaStatusUtils;
 public class CommonEvents {
     @SubscribeEvent
     public static void onDamageDownMotivation(LivingDamageEvent event) {
-        LivingEntity entityLiving = event.getEntityLiving();
+        LivingEntity entityLiving = event.getEntity();
         ItemStack soul = UmapyoiAPI.getUmaSoul(entityLiving);
         if (soul.isEmpty())
             return;
@@ -36,7 +36,7 @@ public class CommonEvents {
 
     @SubscribeEvent
     public static void onDamagePanicking(LivingDamageEvent event) {
-        LivingEntity entityLiving = event.getEntityLiving();
+        LivingEntity entityLiving = event.getEntity();
         ItemStack soul = UmapyoiAPI.getUmaSoul(entityLiving);
         if (soul.isEmpty() || UmaSoulUtils.getMotivation(soul) != Motivations.BAD)
             return;

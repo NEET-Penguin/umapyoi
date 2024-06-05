@@ -45,7 +45,7 @@ public class ClientEvents {
     
     @SubscribeEvent
     public static void onPlayerRendering(RenderPlayerEvent.Pre event) {
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         ItemStack umasoul = UmapyoiAPI.getUmaSoul(player);
         if (!umasoul.isEmpty() && UmapyoiAPI.isUmaSoulRendering(player)) {
             event.getRenderer().getModel().setAllVisible(false);
@@ -65,7 +65,7 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void onPlayerRenderingPost(RenderPlayerEvent.Post event) {
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         if (!UmapyoiConfig.VANILLA_ARMOR_RENDER.get() && armor != null && UmapyoiAPI.isUmaSoulRendering(player)) {
             for (int i = 0; i < player.getInventory().armor.size(); ++i) {
                 player.getInventory().armor.set(i, armor.get(i));

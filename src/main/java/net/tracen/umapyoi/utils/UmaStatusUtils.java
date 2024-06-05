@@ -1,7 +1,6 @@
 package net.tracen.umapyoi.utils;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.tracen.umapyoi.registry.umadata.Motivations;
 
@@ -22,7 +21,7 @@ public class UmaStatusUtils {
     }
 
     public static Component getStatusLevel(int level) {
-        return new TranslatableComponent("umastatus.level." + level);
+        return Component.translatable("umastatus.level." + level);
     }
 
     public static void addMotivation(ItemStack stack) {

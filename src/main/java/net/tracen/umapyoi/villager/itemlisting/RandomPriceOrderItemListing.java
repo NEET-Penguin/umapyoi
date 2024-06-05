@@ -1,6 +1,8 @@
 package net.tracen.umapyoi.villager.itemlisting;
 
 import java.util.Random;
+
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +41,8 @@ public class RandomPriceOrderItemListing implements ItemListing {
        this.priceMultiplier = pPriceMultiplier;
     }
 
-    public MerchantOffer getOffer(Entity pTrader, Random pRand) {
+    @Override
+    public MerchantOffer getOffer(Entity pTrader, RandomSource pRand) {
        int i = 5 + pRand.nextInt(15);
        ItemStack itemstack = itemStack.copy();
        int count = Math.min(pRand.nextInt(minCount, maxCount + 1), 64);

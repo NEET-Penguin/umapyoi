@@ -7,15 +7,15 @@ import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.tracen.umapyoi.Umapyoi;
 import net.tracen.umapyoi.registry.UmaFactorRegistry;
 
-public class UmaFactor extends ForgeRegistryEntry<UmaFactor> {
+import java.util.Objects;
+
+public class UmaFactor {
     private final FactorType type;
     private String descriptionId;
 
@@ -23,7 +23,7 @@ public class UmaFactor extends ForgeRegistryEntry<UmaFactor> {
             .createRegistryKey(new ResourceLocation(Umapyoi.MODID, "factor"));
 
     public static final Codec<UmaFactor> CODEC = ResourceLocation.CODEC
-            .xmap(loc -> UmaFactorRegistry.REGISTRY.get().getValue(loc), instance -> instance.getRegistryName());
+            .xmap(loc -> UmaFactorRegistry.REGISTRY.get().getValue(loc), instance -> UmaFactorRegistry.REGISTRY.get().getKey(instance));
 
     public UmaFactor(FactorType type) {
         this.type = type;
@@ -37,17 +37,17 @@ public class UmaFactor extends ForgeRegistryEntry<UmaFactor> {
         return type;
     }
 
-    @Override
-    public int hashCode() {
-        return this.getRegistryName().hashCode();
-    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.requireNonNull(UmaFactorRegistry.REGISTRY.get().getKey(this)).hashCode();
+//    }
 
     public String toString() {
-        return this.getRegistryName().toString();
+        return Objects.requireNonNull(UmaFactorRegistry.REGISTRY.get().getKey(this)).toString();
     }
 
     public Component getDescription() {
-        return new TranslatableComponent(this.getDescriptionId());
+        return Component.translatable(this.getDescriptionId());
     }
 
     public Component getDescription(UmaFactorStack stack) {
@@ -56,7 +56,7 @@ public class UmaFactor extends ForgeRegistryEntry<UmaFactor> {
 
     protected String getOrCreateDescriptionId() {
         if (this.descriptionId == null) {
-            this.descriptionId = Util.makeDescriptionId("uma_factor", this.getRegistryName());
+            this.descriptionId = Util.makeDescriptionId("uma_factor", UmaFactorRegistry.REGISTRY.get().getKey(this));
         }
         return this.descriptionId;
     }
@@ -68,7 +68,7 @@ public class UmaFactor extends ForgeRegistryEntry<UmaFactor> {
     public Component getFullDescription(int pLevel) {
         MutableComponent mutablecomponent = this.getDescription().copy();
         mutablecomponent.withStyle(ChatFormatting.GRAY);
-        mutablecomponent.append(" ").append(new TranslatableComponent("enchantment.level." + pLevel));
+        mutablecomponent.append(" ").append(Component.translatable("enchantment.level." + pLevel));
         return mutablecomponent;
     }
 }

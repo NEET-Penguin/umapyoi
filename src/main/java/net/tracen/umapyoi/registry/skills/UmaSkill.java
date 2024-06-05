@@ -3,17 +3,16 @@ package net.tracen.umapyoi.registry.skills;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.tracen.umapyoi.Umapyoi;
+import net.tracen.umapyoi.registry.UmaSkillRegistry;
 
-public class UmaSkill extends ForgeRegistryEntry<UmaSkill> {
+public class UmaSkill {
     private final SkillType type;
     private final int requiredWisdom;
     private final int actionPoint;
@@ -51,16 +50,16 @@ public class UmaSkill extends ForgeRegistryEntry<UmaSkill> {
     }
 
     public Component getDescription() {
-        return new TranslatableComponent(this.getDescriptionId());
+        return Component.translatable(this.getDescriptionId());
     }
 
     public String toString() {
-        return this.getRegistryName().toString();
+        return UmaSkillRegistry.REGISTRY.get().getKey(this).toString();
     }
 
     protected String getOrCreateDescriptionId() {
         if (this.descriptionId == null) {
-            this.descriptionId = Util.makeDescriptionId("uma_skill", this.getRegistryName());
+            this.descriptionId = Util.makeDescriptionId("uma_skill", UmaSkillRegistry.REGISTRY.get().getKey(this));
         }
         return this.descriptionId;
     }

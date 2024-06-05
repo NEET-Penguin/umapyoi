@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -30,9 +29,9 @@ public class UmaTicketItem extends Item {
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
         if (!pStack.getOrCreateTag().getString("name").isBlank()) {
             if(pStack.is(UmapyoiItemTags.CARD_TICKET))
-                pTooltipComponents.add(new TranslatableComponent("tooltip.umapyoi.support_card.name",
+                pTooltipComponents.add(Component.translatable("tooltip.umapyoi.support_card.name",
                         TrainingSupportUtils.getTranslatedSupportCardName(this.getSupportCardID(pStack))).withStyle(ChatFormatting.GRAY));
-            else{pTooltipComponents.add(new TranslatableComponent("tooltip.umapyoi.umadata.name",
+            else{pTooltipComponents.add(Component.translatable("tooltip.umapyoi.umadata.name",
                 UmaSoulUtils.getTranslatedUmaName(this.getUmaName(pStack))).withStyle(ChatFormatting.GRAY));
             }
         }

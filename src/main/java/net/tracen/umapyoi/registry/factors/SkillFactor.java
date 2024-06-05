@@ -3,7 +3,6 @@ package net.tracen.umapyoi.registry.factors;
 import java.util.Random;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.tracen.umapyoi.registry.UmaSkillRegistry;
@@ -30,7 +29,7 @@ public class SkillFactor extends UmaFactor {
         if (skill != null && UmaSkillRegistry.REGISTRY.get().containsKey(skill)) {
             UmaSkill result = UmaSkillRegistry.REGISTRY.get().getValue(skill);
             return result.getDescription().copy().append(" ")
-                    .append(new TranslatableComponent("enchantment.level." + stack.getLevel()));
+                    .append(Component.translatable("enchantment.level." + stack.getLevel()));
         }
         return super.getDescription(stack);
     }

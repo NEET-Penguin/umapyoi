@@ -5,9 +5,10 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
-import net.minecraftforge.client.gui.OverlayRegistry;
+import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -45,26 +46,14 @@ public class ClientSetupEvents {
             CuriosRendererRegistry.register(ItemRegistry.SWIMSUIT.get(),
                     SwimsuitRenderer::new);
         });
-        event.enqueueWork(() -> {
-            ItemBlockRenderTypes.setRenderLayer(BlockRegistry.TRAINING_FACILITY.get(), RenderType.cutoutMipped());
-        });
-        event.enqueueWork(() -> {
-            ClientRegistry.registerKeyBinding(SkillKeyMapping.KEY_USE_SKILL);
-            ClientRegistry.registerKeyBinding(SkillKeyMapping.KEY_FORMER_SKILL);
-            ClientRegistry.registerKeyBinding(SkillKeyMapping.KEY_LATTER_SKILL);
-        });
-
-        OverlayRegistry.registerOverlayBottom("umapyoi.skill_overlay", SkillOverlay.INSTANCE);
-        OverlayRegistry.registerOverlayBottom("umapyoi.motivation_overlay", MotivationOverlay.INSTANCE);
-        OverlayRegistry.registerOverlayBottom("umapyoi.action_bar", ActionBarOverlay.INSTANCE);
 
         BlockEntityRenderers.register(BlockEntityRegistry.THREE_GODDESS.get(), ThreeGoddessBlockRender::new);
         BlockEntityRenderers.register(BlockEntityRegistry.UMA_PEDESTAL.get(), UmaPedestalBlockRender::new);
         BlockEntityRenderers.register(BlockEntityRegistry.SUPPORT_ALBUM_PEDESTAL.get(),
                 SupportAlbumPedestalBlockRender::new);
-        
+
         BlockEntityRenderers.register(BlockEntityRegistry.UMA_STATUES.get(), UmaStatuesBlockRender::new);
-        
+
         BlockEntityRenderers.register(BlockEntityRegistry.SILVER_UMA_PEDESTAL.get(), SilverUmaPedestalBlockRender::new);
         BlockEntityRenderers.register(BlockEntityRegistry.SILVER_SUPPORT_ALBUM_PEDESTAL.get(),
                 SilverSupportAlbumPedestalBlockRender::new);
@@ -73,6 +62,20 @@ public class ClientSetupEvents {
     @SubscribeEvent
     public static void resourceLoadingListener(final RegisterClientReloadListenersEvent event) {
         event.registerReloadListener(new BedrockModelResourceLoader("models/umapyoi"));
+    }
+
+    @SubscribeEvent
+    public static void registerKeyMapping(RegisterKeyMappingsEvent event) {
+        event.register(SkillKeyMapping.KEY_USE_SKILL);
+        event.register(SkillKeyMapping.KEY_FORMER_SKILL);
+        event.register(SkillKeyMapping.KEY_LATTER_SKILL);
+    }
+
+    @SubscribeEvent
+    public static void registerGuiOverlay(RegisterGuiOverlaysEvent event) {
+        event.registerBelowAll("umapyoi.skill_overlay", SkillOverlay.INSTANCE);
+        event.registerBelowAll("umapyoi.motivation_overlay", MotivationOverlay.INSTANCE);
+        event.registerBelowAll("umapyoi.action_bar", ActionBarOverlay.INSTANCE);
     }
 
 }

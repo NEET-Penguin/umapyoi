@@ -16,7 +16,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -53,7 +52,7 @@ public class SupportCardItem extends Item implements SupportContainer {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
-        if (this.allowdedIn(pCategory)) {
+        if (this.allowedIn(pCategory)) {
             if (Minecraft.getInstance().getConnection() != null) {
                 SupportCardItem.sortedCardDataList().forEach(card -> {
                     if (card.getKey().location().equals(SupportCardRegistry.BLANK_CARD.getId()))
@@ -118,11 +117,11 @@ public class SupportCardItem extends Item implements SupportContainer {
             return ;
         if(!this.getSupports(worldIn, stack).isEmpty()) {
             if (Screen.hasShiftDown() || !UmapyoiConfig.TOOLTIP_SWITCH.get()) {
-                tooltip.add(new TranslatableComponent("tooltip.umapyoi.supports").withStyle(ChatFormatting.AQUA));
+                tooltip.add(Component.translatable("tooltip.umapyoi.supports").withStyle(ChatFormatting.AQUA));
                 this.getSupports(worldIn, stack)
                         .forEach(support -> tooltip.add(support.getDescription().copy().withStyle(ChatFormatting.GRAY)));
             } else {
-                tooltip.add(new TranslatableComponent("tooltip.umapyoi.support_card.press_shift_for_supports")
+                tooltip.add(Component.translatable("tooltip.umapyoi.support_card.press_shift_for_supports")
                         .withStyle(ChatFormatting.AQUA));
             }
         }
@@ -130,11 +129,11 @@ public class SupportCardItem extends Item implements SupportContainer {
         List<ResourceLocation> supporters = ClientUtils.getClientSupportCardRegistry().get(cardID).getSupporters();
         if (!supporters.isEmpty()) {
             if (Screen.hasControlDown() || !UmapyoiConfig.TOOLTIP_SWITCH.get()) {
-                tooltip.add(new TranslatableComponent("tooltip.umapyoi.supporters").withStyle(ChatFormatting.AQUA));
+                tooltip.add(Component.translatable("tooltip.umapyoi.supporters").withStyle(ChatFormatting.AQUA));
                 supporters.forEach(name -> tooltip
                         .add(UmaSoulUtils.getTranslatedUmaName(name).copy().withStyle(ChatFormatting.GRAY)));
             } else {
-                tooltip.add(new TranslatableComponent("tooltip.umapyoi.support_card.press_ctrl_for_supporters")
+                tooltip.add(Component.translatable("tooltip.umapyoi.support_card.press_ctrl_for_supporters")
                         .withStyle(ChatFormatting.AQUA));
             }
         }

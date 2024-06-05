@@ -12,7 +12,6 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -41,10 +40,10 @@ public class UmaFactorContainerItem extends Item {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         CompoundTag tag = stack.getOrCreateTag();
         StringBuffer buffer = new StringBuffer("umadata.").append(tag.getString("name").toString().replace(':', '.'));
-        tooltip.add(new TranslatableComponent("tooltip.umapyoi.umadata.name", I18n.get(buffer.toString()))
+        tooltip.add(Component.translatable("tooltip.umapyoi.umadata.name", I18n.get(buffer.toString()))
                 .withStyle(ChatFormatting.GRAY));
         if (Screen.hasShiftDown() || !UmapyoiConfig.TOOLTIP_SWITCH.get()) {
-            tooltip.add(new TranslatableComponent("tooltip.umapyoi.factors.factors_details")
+            tooltip.add(Component.translatable("tooltip.umapyoi.factors.factors_details")
                     .withStyle(ChatFormatting.AQUA));
             List<UmaFactorStack> stackList = UmaFactorUtils.deserializeNBT(tag);
 
@@ -57,7 +56,7 @@ public class UmaFactorContainerItem extends Item {
                 }
             });
         } else {
-            tooltip.add(new TranslatableComponent("tooltip.umapyoi.press_shift_for_details")
+            tooltip.add(Component.translatable("tooltip.umapyoi.press_shift_for_details")
                     .withStyle(ChatFormatting.AQUA));
         }
     }
@@ -65,7 +64,7 @@ public class UmaFactorContainerItem extends Item {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        if (this.allowdedIn(group)) {
+        if (this.allowedIn(group)) {
             for (UmaFactor factor : UmaFactorRegistry.REGISTRY.get().getValues()) {
                 if (factor == UmaFactorRegistry.SKILL_FACTOR.get() || factor.getFactorType() == FactorType.UNIQUE)
                     continue;

@@ -28,7 +28,7 @@ public class PassiveSkillEvents {
 
     @SubscribeEvent
     public static void testPassiveSkill_att(PlayerEvent.BreakSpeed event) {
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         var soul = UmapyoiAPI.getUmaSoul(player);
         if (UmaSoulUtils.hasSkill(soul, UmaSkillRegistry.DIG_SPEED.getId()))
             event.setNewSpeed(event.getOriginalSpeed() * 1.1F);

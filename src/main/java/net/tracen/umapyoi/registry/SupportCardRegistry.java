@@ -17,9 +17,7 @@ import net.tracen.umapyoi.utils.UmaSkillUtils;
 public class SupportCardRegistry {
     public static final DeferredRegister<SupportCard> SUPPORT_CARD = DeferredRegister.create(SupportCard.REGISTRY_KEY,
             Umapyoi.MODID);
-    public static final Supplier<IForgeRegistry<SupportCard>> UMA_DATA_REGISTRY = SUPPORT_CARD
-            .makeRegistry(SupportCard.class, () -> new RegistryBuilder<SupportCard>().disableSaving()
-                    .dataPackRegistry(SupportCard.CODEC, SupportCard.CODEC));
+    public static final Supplier<IForgeRegistry<SupportCard>> UMA_DATA_REGISTRY = SUPPORT_CARD.makeRegistry(() -> new RegistryBuilder<SupportCard>().disableSaving().dataPackRegistry(SupportCard.CODEC, SupportCard.CODEC));
     public static final RegistryObject<SupportCard> BLANK_CARD = SUPPORT_CARD.register("blank_card",
             SupportCard.Builder.create().ranking(GachaRanking.EASTER_EGG).supportType(SupportType.GROUP)::build);
     

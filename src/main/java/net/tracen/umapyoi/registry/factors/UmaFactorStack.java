@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.tracen.umapyoi.events.ApplyFactorEvent;
+import net.tracen.umapyoi.registry.UmaFactorRegistry;
 
 public class UmaFactorStack {
     private final UmaFactor factor;
@@ -75,7 +76,7 @@ public class UmaFactorStack {
 
     @Override
     public int hashCode() {
-        int code = 31 * Integer.hashCode(getLevel()) + this.getFactor().getRegistryName().hashCode();
+        int code = 31 * Integer.hashCode(getLevel()) + UmaFactorRegistry.REGISTRY.get().getKey(this.getFactor()).hashCode();
         if (tag != null)
             code = 31 * code + tag.hashCode();
         return code;

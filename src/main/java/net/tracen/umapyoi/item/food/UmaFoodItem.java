@@ -27,13 +27,13 @@ public class UmaFoodItem extends ItemFoodBase {
                 Player entityplayer = (Player) entity;
                 if (entityplayer.getAbilities().instabuild)
                     return itemstack;
-                if (!entityplayer.addItem(this.getContainerItem(stack)))
-                    entityplayer.drop(this.getContainerItem(stack), true);
+                if (!entityplayer.addItem(this.getCraftingRemainingItem(stack)))
+                    entityplayer.drop(this.getCraftingRemainingItem(stack), true);
             }
             return itemstack;
         }
         return entity instanceof Player && ((Player) entity).getAbilities().instabuild ? itemstack
-                : this.getContainerItem(stack);
+                : this.getCraftingRemainingItem(stack);
     }
 
     private ItemStack eatAsUma(ItemStack stack, Level level, LivingEntity entity) {

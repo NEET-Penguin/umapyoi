@@ -3,7 +3,7 @@ package net.tracen.umapyoi.network;
 import java.util.function.Supplier;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -43,21 +43,27 @@ public class UseSkillPacket {
                 ResourceLocation selectedSkillName = UmaSoulUtils.getSelectedSkill(umaSoul);
                 UmaSkill selectedSkill = UmaSkillRegistry.REGISTRY.get().getValue(selectedSkillName);
                 if (selectedSkill == null) {
-                    player.displayClientMessage(new TranslatableComponent("umapyoi.unknown_skill"), true);
+                    player.displayClientMessage(Component.translatable("umapyoi.unknown_skill"), true);
                     return;
                 }
                 if (MinecraftForge.EVENT_BUS.post(new SkillEvent.UseSkillEvent(selectedSkillName, player.getLevel(), player)))
                     return;
                 int ap = UmaSoulUtils.getActionPoint(umaSoul);
                 if (ap >= selectedSkill.getActionPoint()) {
-                    player.connection.send(new ClientboundSoundPacket(selectedSkill.getSound(), SoundSource.PLAYERS,
-                            player.getX(), player.getY(), player.getZ(), 1F, 1F));
+                    player.connection.send(new ClientboundSoundPacket(selectedSkill.getSound(),
+                            SoundSource.PLAYERS,
+                            player.getX(),
+                            player.getY(),
+                            player.getZ(),
+                            1F,
+                            1F,
+                            0));
                     selectedSkill.applySkill(player.getLevel(), player);
                     UmaSoulUtils.setActionPoint(umaSoul, ap - selectedSkill.getActionPoint());
                     MinecraftForge.EVENT_BUS.post(
-                            new SkillEvent.ApplySkillEvent(selectedSkill.getRegistryName(), player.getLevel(), player));
+                            new SkillEvent.ApplySkillEvent(UmaSkillRegistry.REGISTRY.get().getKey(selectedSkill), player.getLevel(), player));
                 } else {
-                    player.displayClientMessage(new TranslatableComponent("umapyoi.not_enough_ap"), true);
+                    player.displayClientMessage(Component.translatable("umapyoi.not_enough_ap"), true);
                 }
             }
         });

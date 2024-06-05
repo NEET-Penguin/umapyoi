@@ -24,8 +24,7 @@ public class UmaSkillRegistry {
     public static final DeferredRegister<UmaSkill> SKILLS = DeferredRegister.create(UmaSkill.REGISTRY_KEY,
             Umapyoi.MODID);
 
-    public static final Supplier<IForgeRegistry<UmaSkill>> REGISTRY = SKILLS.makeRegistry(UmaSkill.class,
-            RegistryBuilder::new);
+    public static final Supplier<IForgeRegistry<UmaSkill>> REGISTRY = SKILLS.makeRegistry(RegistryBuilder::new);
 
     public static final RegistryObject<UmaSkill> BASIC_PACE = SKILLS.register("basic_pace",
             () -> new SpeedSkill(new UmaSkill.Builder().level(1).type(SkillType.BUFF), 400));

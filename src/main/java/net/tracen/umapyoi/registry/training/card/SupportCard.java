@@ -9,14 +9,16 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraftforge.registries.DeferredRegister;
 import net.tracen.umapyoi.Umapyoi;
 import net.tracen.umapyoi.registry.TrainingSupportRegistry;
 import net.tracen.umapyoi.registry.training.SupportStack;
 import net.tracen.umapyoi.registry.training.SupportType;
 import net.tracen.umapyoi.utils.GachaRanking;
 
-public class SupportCard extends ForgeRegistryEntry<SupportCard> {
+public class SupportCard {
+
+
     public static final Codec<SupportCard> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             GachaRanking.CODEC.optionalFieldOf("ranking", GachaRanking.EASTER_EGG)
                     .forGetter(SupportCard::getGachaRanking),

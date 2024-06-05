@@ -20,6 +20,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -70,7 +71,7 @@ public class ClientUtils {
     }
     
     public static void addSummonParticle(Level pLevel, BlockPos pPos) {
-        Random pRand = pLevel.getRandom();
+        RandomSource pRand = pLevel.getRandom();
         List<BlockPos> posOffsets = BlockPos.betweenClosedStream(-1, -1, -1, 1, 0, 1).filter(pos -> {
             return Math.abs(pos.getX()) == 1 || Math.abs(pos.getZ()) == 1;
         }).map(BlockPos::immutable).toList();

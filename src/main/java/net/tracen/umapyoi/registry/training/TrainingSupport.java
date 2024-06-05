@@ -7,19 +7,17 @@ import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.tracen.umapyoi.Umapyoi;
 import net.tracen.umapyoi.registry.TrainingSupportRegistry;
 
-public class TrainingSupport extends ForgeRegistryEntry<TrainingSupport> {
+public class TrainingSupport {
     private String descriptionId;
 
     public static final Codec<TrainingSupport> CODEC = ResourceLocation.CODEC
-            .xmap(loc -> TrainingSupportRegistry.REGISTRY.get().getValue(loc), instance -> instance.getRegistryName());
+            .xmap(loc -> TrainingSupportRegistry.REGISTRY.get().getValue(loc), instance ->  TrainingSupportRegistry.REGISTRY.get().getKey(instance));
 
     public static final ResourceKey<Registry<TrainingSupport>> REGISTRY_KEY = ResourceKey
             .createRegistryKey(new ResourceLocation(Umapyoi.MODID, "training_support"));
@@ -31,17 +29,13 @@ public class TrainingSupport extends ForgeRegistryEntry<TrainingSupport> {
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        return this.getRegistryName().hashCode();
-    }
 
     public String toString() {
-        return this.getRegistryName().toString();
+        return TrainingSupportRegistry.REGISTRY.get().getKey(this).toString();
     }
 
     public Component getDescription() {
-        return new TranslatableComponent(this.getDescriptionId());
+        return Component.translatable(this.getDescriptionId());
     }
 
     public Component getDescription(SupportStack stack) {
@@ -50,7 +44,7 @@ public class TrainingSupport extends ForgeRegistryEntry<TrainingSupport> {
 
     protected String getOrCreateDescriptionId() {
         if (this.descriptionId == null) {
-            this.descriptionId = Util.makeDescriptionId("support", this.getRegistryName());
+            this.descriptionId = Util.makeDescriptionId("support", TrainingSupportRegistry.REGISTRY.get().getKey(this));
         }
         return this.descriptionId;
     }
@@ -60,9 +54,9 @@ public class TrainingSupport extends ForgeRegistryEntry<TrainingSupport> {
     }
 
     public Component getFullDescription(int pLevel) {
-        MutableComponent mutablecomponent = new TranslatableComponent(this.getDescriptionId());
+        MutableComponent mutablecomponent = Component.translatable(this.getDescriptionId());
         mutablecomponent.withStyle(ChatFormatting.GRAY);
-        mutablecomponent.append(" ").append(new TranslatableComponent("enchantment.level." + pLevel));
+        mutablecomponent.append(" ").append(Component.translatable("enchantment.level." + pLevel));
         return mutablecomponent;
     }
 }

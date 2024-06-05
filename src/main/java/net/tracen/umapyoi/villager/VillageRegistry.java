@@ -1,10 +1,12 @@
 package net.tracen.umapyoi.villager;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableSet;
 
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -24,23 +26,26 @@ public class VillageRegistry {
             Umapyoi.MODID);
 
     public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister
-            .create(ForgeRegistries.PROFESSIONS, Umapyoi.MODID);
+            .create(ForgeRegistries.VILLAGER_PROFESSIONS, Umapyoi.MODID);
 
     public static final RegistryObject<PoiType> TRAINER_POI = POI_TYPES.register("trainer_poi",
-            () -> createPOI(new ResourceLocation(Umapyoi.MODID, "trainer_poi"),
-                    assembleStates(BlockRegistry.TRAINING_FACILITY.get())));
+            () -> createPOI(assembleStates(BlockRegistry.TRAINING_FACILITY.get())));
 
     public static final RegistryObject<VillagerProfession> TRAINER = PROFESSIONS.register("trainer",
-            () -> createProf(new ResourceLocation(Umapyoi.MODID, "trainer"), TRAINER_POI.get(),
-                    SoundEvents.VILLAGER_WORK_LIBRARIAN));
+            () -> createProf("trainer", TRAINER_POI, SoundEvents.VILLAGER_WORK_LIBRARIAN));
 
-    private static PoiType createPOI(ResourceLocation name, Collection<BlockState> block) {
-        return new PoiType(name.toString(), ImmutableSet.copyOf(block), 1, 1);
+    private static PoiType createPOI(Collection<BlockState> block) {
+        return new PoiType(ImmutableSet.copyOf(block), 1, 1);
     }
 
-    private static VillagerProfession createProf(ResourceLocation name, PoiType poi, SoundEvent sound) {
-        return new VillagerProfession(name.toString(), poi, ImmutableSet.<Item>builder().build(),
-                ImmutableSet.<Block>builder().build(), sound);
+    private static VillagerProfession createProf(String name, RegistryObject<PoiType> poi, SoundEvent sound) {
+        ResourceKey<PoiType> poiName = Objects.requireNonNull(poi.getKey());
+        return new VillagerProfession(name,
+                holder -> holder.is(poiName),
+                holder -> holder.is(poiName),
+                ImmutableSet.of(),
+                ImmutableSet.of(),
+                sound);
     }
 
     private static Collection<BlockState> assembleStates(Block block) {

@@ -9,11 +9,14 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraftforge.registries.DeferredRegister;
 import net.tracen.umapyoi.Umapyoi;
 import net.tracen.umapyoi.utils.GachaRanking;
 
-public class UmaData extends ForgeRegistryEntry<UmaData> {
+public class UmaData {
+    public static final ResourceLocation DEFAULT_UMA_ID = new ResourceLocation(Umapyoi.MODID, "common_uma");
+    public static final UmaData DEFAULT_UMA = UmaData.createNewUmamusume("common_uma", GachaRanking.R);
+
     public static final Codec<UmaData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ResourceLocation.CODEC.fieldOf("identifier").forGetter(UmaData::getIdentifier),
             GachaRanking.CODEC.optionalFieldOf("ranking", GachaRanking.EASTER_EGG).forGetter(UmaData::getGachaRanking),
@@ -68,6 +71,17 @@ public class UmaData extends ForgeRegistryEntry<UmaData> {
 
     public ResourceLocation uniqueSkill() {
         return uniqueSkill;
+    }
+
+    public static UmaData createNewUmamusume(String name, GachaRanking ranking) {
+        return new UmaData(new ResourceLocation(Umapyoi.MODID, name), ranking, new int[] { 1, 1, 1, 1, 1 },
+                new int[] { 18, 18, 18, 18, 18 }, new int[] { 0, 0, 0, 0, 0 },
+                new ResourceLocation(Umapyoi.MODID, "basic_pace"));
+    }
+
+    public static UmaData createNewUmamusume(String name, GachaRanking ranking, int[] rate) {
+        return new UmaData(new ResourceLocation(Umapyoi.MODID, name), ranking, new int[] { 1, 1, 1, 1, 1 },
+                new int[] { 18, 18, 18, 18, 18 }, rate, new ResourceLocation(Umapyoi.MODID, "basic_pace"));
     }
 
 }

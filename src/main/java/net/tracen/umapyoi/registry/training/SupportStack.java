@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.tracen.umapyoi.events.ApplyTrainingSupportEvent;
+import net.tracen.umapyoi.registry.TrainingSupportRegistry;
 
 public class SupportStack {
     private final TrainingSupport factor;
@@ -88,7 +89,7 @@ public class SupportStack {
 
     @Override
     public int hashCode() {
-        int code = 31 * Integer.hashCode(getLevel()) + this.getFactor().getRegistryName().hashCode();
+        int code = 31 * Integer.hashCode(getLevel()) + TrainingSupportRegistry.REGISTRY.get().getKey(this.getFactor()).hashCode();
         if (tag != null)
             code = 31 * code + tag.hashCode();
         return code;
